@@ -3,7 +3,6 @@ include("assets/Funciones/conexion.php"); //Funcion que hace la conexion con la 
 include("assets/Funciones/agregar_tarea.php");
 include("assets/Funciones/actualizar_estado.php");
 include("assets/Funciones/eliminar_tarea.php");
-include("assets/Funciones/funciones_listadas.php");
 
 $conexion=conectar();
 
@@ -40,69 +39,82 @@ $resultado = $conexion->query($sql);
     <title>Pruebas con bases de datos</title>
 </head>
 <body>
-    <div class="container">
-        <div class="tabla_datos divs">
-            <table>
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Descripción</th>
-                <th>Estado</th>
-                <th>Fecha de creación</th>
-                <th>Cambiar estado</th>
-                <th>Eliminar tarea</th>
-            </tr>
-            <tr>
-                <?php
-                    while($fila=$resultado->fetch_assoc()){
-                        echo "<form class='form_tabla' method='POST' >
-                            <tr>
-                                <td><input type='hidden' name='id_attached' value={$fila['id']}>{$fila['id']}</td>
-                                <td>{$fila['titulo']}</td>
-                                <td>{$fila['descripcion']}</td>
-                                <td>{$fila['estado']}</td>
-                                <td>{$fila['fecha_creacion']}</td>
-                                <td><input class='inputs' type='submit' name='update_button' value='Actualizar'></td>
-                                <td><input class='inputs' type='submit' name='delete_button' value='Eliminar'></td>
-                            </tr>
-                        </form>";
-                    }
-                ?>
-            </tr>
+    <main class="main_container">
+        <div class="div_tabla divs">
+            <table class="tabla_datos">
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Fecha de creación</th>
+                    <th>Cambiar estado</th>
+                    <th>Eliminar tarea</th>
+                </tr>
+                <tr>
+                    <?php
+                        while($fila=$resultado->fetch_assoc()){
+                            $clase = ($fila['estado'] === 'Y') ? 'completada' : 'pendiente';
+                            echo "<form class='form_tabla' method='POST' >
+                                <tr class='$clase'>
+                                    <td><input type='hidden' name='id_attached' value={$fila['id']}>{$fila['id']}</td>
+                                    <td>{$fila['titulo']}</td>
+                                    <td>{$fila['descripcion']}</td>
+                                    <td>{$fila['estado']}</td>
+                                    <td>{$fila['fecha_creacion']}</td>
+                                    <td><input class='inputs submit_inputs_form' type='submit' name='update_button' value='Actualizar'></td>
+                                    <td><input class='inputs submit_inputs_form' type='submit' name='delete_button' value='Eliminar'></td>
+                                </tr>
+                            </form>";
+                        }
+                    ?>
+                </tr>
             </table>
         </div>
+        
+        <div class="adicional_content">
+            <div class="divs div_izquierda">
+                <fieldset class="agregar_datos divs">
+                    <legend>Nueva tarea</legend>
+                    <span>Ingrese los datos de la nueva tarea:</span>
+                    <form method='POST'>
+                        <label>ID:</label>
+                                <input class="inputs" type='number' placeholder='Ejemplo: 1'name='id' required><br> 
+                        <label>Título:</label>
+                                <input class="inputs" type='text' placeholder='Ejemplo: Crear formulario...' name='titulo' required><br>
+                        <label>Descripción:</label>
+                                <input class="inputs" type='text' placeholder='Ejemplo: Se crea el formulario para...' name='descripcion' required><br>
+                        <label>Estado:</label>
+                                <input class="check_inputs" type='checkbox' name='estado'><br>
+                        <input class="inputs submit_inputs" type='submit' name='nueva_tarea' value='Enviar'><br>
+                    </form>
+                </fieldset>
+            </div>
 
-        <div class="agregar_datos divs"><span>Ingrese los siguientes datos</span><br> 
-            <form method='POST'>
-                <label>ID:</label>
-                        <input class="inputs" type='number' placeholder='Ejemplo: 1'name='id' required><br> 
-                <label>Título:</label>
-                        <input class="inputs" type='text' placeholder='Ejemplo: Crear formulario...' name='titulo' required><br>
-                <label>Descripción:</label>
-                        <input class="inputs" type='text' placeholder='Ejemplo: Se crea el formulario para...' name='descripcion' required><br>
-                <label>Estado:</label>
-                        <input class="inputs" type='checkbox' name='estado'><br>
-                <input class="inputs" type='submit' name='nueva_tarea' value='Enviar'><br>
-            </form>
+            <div class="divs div_arriba_derecha">
+                <fieldset class="marcar_completado divs">
+                    <legend>Completar tarea</legend>    
+                    <span>Ingrese el ID que desea marcar como completado:<br></span>
+                    <form method='POST'>
+                        <label>ID:</label>
+                            <input class="inputs" type='number' placeholder='Ejemplo: 1' name='id_completar' required>
+                            <input class="inputs submit_inputs" type='submit' name='completar' value='Enviar'>
+                    </form>
+                </fieldset>
+            </div>
+            
+            <div class="divs div_abajo_derecha">
+                <fieldset class="eliminar_fila divs">
+                    <legend>Eliminar tarea</legend>
+                    <span>Ingrese el ID de la tarea que desea eliminar:<br></span>
+                    <form method='POST'>
+                        <label>ID:</label>
+                            <input class="inputs" type='number' name='id_a_eliminar' placeholder='Ejemplo: 1' required>
+                            <input class="inputs submit_inputs" type='submit' name='a_eliminar' value='Enviar'>
+                    </form>
+                </fieldset>
+            </div>
         </div>
-
-
-
-        <div class="marcar_completado divs"><span>Ingrese el ID que desea marcar como completado:<br></span>
-            <form method='POST'>
-                <label>ID:</label>
-                    <input class="inputs" type='number' placeholder='Ejemplo: 1' name='id_completar' required>
-                    <input class="inputs" type='submit' name='completar' value='Enviar'>
-            </form>
-        </div>
-        <div class="eliminar_fila divs">
-            <span>Ingrese el ID de la tarea que desea eliminar:<br></span>
-            <form method='POST'>
-                <label>ID:</label>
-                    <input class="inputs" type='number' name='id_a_eliminar' placeholder='Ejemplo: 1' required>
-                    <input class="inputs" type='submit' name='a_eliminar' value='Enviar'>
-            </form>
-        </div>
-    </div>
+    </main>
 </body>
 </html>
