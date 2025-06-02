@@ -18,6 +18,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                 $id=$_POST['id_attached'];
                 actualizar_estado($conexion,$id);
         }
+        if(isset($_POST['a_eliminar'])){
+                $id=$_POST['id_a_eliminar'];
+                eliminar_tarea($conexion,$id);
+        }
         if(isset($_POST['delete_button'])){
                 echo "onclick= 'return confirm('¿Está seguro de que desea eliminar esta tarea?');'">
                 $id=$_POST['id_attached'];
@@ -55,7 +59,7 @@ $resultado = $conexion->query($sql);
                     <?php
                         while($fila=$resultado->fetch_assoc()){
                             $clase = ($fila['estado'] === 'Y') ? 'completada' : 'pendiente';
-                            echo "<form class='form_tabla' method='POST' >
+                            echo "<form class='form_tabla' method='POST' onsubmit='return confirm(\"¿Está seguro de que desea realizar esta acción?\")'; >
                                 <tr class='$clase'>
                                     <td><input type='hidden' name='id_attached' value={$fila['id']}>{$fila['id']}</td>
                                     <td>{$fila['titulo']}</td>
@@ -107,12 +111,15 @@ $resultado = $conexion->query($sql);
                 <fieldset class="eliminar_fila divs">
                     <legend>Eliminar tarea</legend>
                     <span>Ingrese el ID de la tarea que desea eliminar:<br></span>
-                    <form method='POST'>
+                    <form method='POST' onsubmit="return confirm('¿Está seguro de que desea eliminar esta tarea?');"> 
                         <label>ID:</label>
                             <input class="inputs" type='number' name='id_a_eliminar' placeholder='Ejemplo: 1' required>
                             <input class="inputs submit_inputs" type='submit' name='a_eliminar' value='Enviar'>
                     </form>
                 </fieldset>
+            </div>
+            <div class="login">
+                <a href="login.php"><h2>Login</h2></a>
             </div>
         </div>
     </main>

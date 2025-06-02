@@ -185,13 +185,53 @@ legend{
     padding: 0 5px;
 }
 
-.completada{
+.completada, .completada td{
     background-color: #0f06;
-    /* border: solid 10px #000;
-    border-radius: 5px; */
-    
+    border: solid 1px #000;
+    border-radius: 5px;
 }
 
-.pendiente{
+.pendiente, .pendiente td{
     background-color: #dd0a;
+    border: solid 1px #000;
+    border-radius: 5px;
+}
+
+.login{
+    background-color: #50a4;
+    width: fit-content;
+    height: fit-content;
+    padding: 0 10px;
+    margin: auto;
+}
+/*Esto corresponde a login.php*/
+
+.main_login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 100dvh;
+}
+
+.login_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: fit-content;
+}
+
+.login_fieldset{
+    box-sizing: border-box;
+    padding: 20px;
+    width: fit-content;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
