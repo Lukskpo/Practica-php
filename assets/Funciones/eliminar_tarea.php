@@ -1,7 +1,7 @@
 <?php
     function eliminar_tarea($conexion,$id){
         if(is_numeric($id)){
-            $statement = $conexion->prepare("DELETE FROM prueba_db WHERE id=?");
+            $statement = $conexion->prepare("DELETE FROM tareas WHERE id=?");
             $statement->bind_param("i",$id);
             
             if($statement->execute()){

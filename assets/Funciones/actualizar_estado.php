@@ -2,7 +2,7 @@
     function actualizar_estado($conexion,$id){
         //Validación simple
         if(is_numeric($id)){
-            $stmt = $conexion->prepare("UPDATE prueba_db SET estado = if(estado='Y','N', 'Y') WHERE id= ?");
+            $stmt = $conexion->prepare("UPDATE tareas SET estado = if(estado='Y','N', 'Y') WHERE id= ?");
             $stmt ->bind_param("i",$id);
 
             if($stmt->execute()){

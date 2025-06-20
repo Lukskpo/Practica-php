@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         header("Location: " . $_SERVER['PHP_SELF']);    // Redirigir a la misma página para evitar el reenvío del formulario
 }
 
-$sql ="SELECT * FROM prueba_db";           //
+$sql ="SELECT * FROM tareas";           //
 $resultado = $conexion->query($sql);
 
 ?>
@@ -75,7 +75,6 @@ $resultado = $conexion->query($sql);
                 </tr>
             </table>
         </div>
-        
         <div class="adicional_content">
             <div class="divs div_izquierda">
                 <fieldset class="agregar_datos divs">

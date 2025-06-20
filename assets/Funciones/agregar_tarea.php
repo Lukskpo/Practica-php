@@ -10,7 +10,7 @@
         $descripcion=$_POST['descripcion'];
         $estado = isset($_POST['estado']) ? 1 : 'N';
         
-        $nueva_tarea = $conexion->prepare("INSERT INTO prueba_db (id,titulo, descripcion, estado, fecha_creacion) VALUES(?,?,?,?,?)");
+        $nueva_tarea = $conexion->prepare("INSERT INTO tareas (id,titulo, descripcion, estado, fecha_creacion) VALUES(?,?,?,?,?)");
         $nueva_tarea->bind_param("issss",$id,$titulo,$descripcion,$estado,$fecha_creacion);
 
         if ($nueva_tarea->execute()) {

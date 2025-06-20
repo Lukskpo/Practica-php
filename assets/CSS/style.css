@@ -232,6 +232,27 @@ legend{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
     text-align: center;
+}
+
+.forgotten_password{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+    text-decoration: underline;
+    color: #fffb;
+}
+
+.sign_up{
+    padding: 3px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    margin-top: 10px;
+    width: fit-content;
+    text-decoration: underline;
+    color: #fffb;
 }

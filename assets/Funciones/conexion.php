@@ -1,10 +1,15 @@
 <?php
     function conectar(){
+        $server="localhost";
         $user="root";
         $password="";
-        $dbname="tareas";
-        $server="localhost";
-        $conexion = mysqli_connect($server,$user,$password,$dbname) or die("No se conectó a la base de datos") ;
+        $dbname="prueba_db";
+        $conexion = new mysqli($server,$user,$password,$dbname);
+
+        if ($conexion->connect_error) {
+            die("Error de conexión: " . $conexion->connect_error);
+        }
+        $conexion->set_charset("utf8"); // Establecer el conjunto de caracteres a utf8mb4
 
         return $conexion;
     }
